@@ -3,7 +3,6 @@ import Tgbooking from "../models/TourGuideBooking.js"
 export const createBooking = async (req, res) => {
   try {
 
-
     const booking = await Tgbooking.create({
       ...req.body,
       
@@ -15,11 +14,9 @@ export const createBooking = async (req, res) => {
       data: booking,
     });
   } catch (error) {
-    res.status(401).json({
+    res.status(400).json({
       success: false,
-      app:"hello",
       message: error.message,
-      
     });
   }
 };
@@ -56,10 +53,11 @@ export const getBookingById = async (req, res) => {
 // UPDATE BOOKING
 export const updateBooking = async (req, res) => {
   try {
+    const totalFee = calculateFee(req.body);
 
     const booking = await Tgbooking.findByIdAndUpdate(
       req.params.id,
-      { ...req.body },
+      { ...req.body, totalFee },
       { new: true, runValidators: true }
     );
 

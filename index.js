@@ -7,8 +7,6 @@ import connectDB from "./config/db.js";
 import cron from "node-cron";
 import { checkAndSendReminders } from "./utils/paymentReminder.js";
 
-
-// // Routers
 import packageRoutes from "./routes/Package.Routes.js";
 import blogRoutes from "./routes/Blogs.Routes.js";
 import testimonialRoutes from "./routes/Testimonial.Routes.js";
@@ -92,8 +90,8 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/custom-tour-requests", customTourRequestRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/tourguidebookings", tgbookingRoutes);
-//app.use("/api/v2/guides",TourGuideRoutes )
-app.use("/api/services",TourRoutes)
+app.use("/api/v2/guides",TourGuideRoutes )
+app.use("/api/services",TourRoutes) 
 //Middleware for handling errors:
 app.use(notFound);
 app.use(errorHandler);
