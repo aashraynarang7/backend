@@ -5,9 +5,10 @@ export const createTour = async (req, res) => {
   try {
         console.log(req.files)
 
-    const images = req.files?.map((file) => file.path);
+    const images = req.files?.map((file) => file.location);
     if (!images || images.length === 0) {
       return res.status(400).json({
+
         success: false,
         message: "At least one tour image is required",
       });

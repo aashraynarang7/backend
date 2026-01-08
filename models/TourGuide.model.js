@@ -20,6 +20,13 @@ const guideSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: String, // URL / file path
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      lowercase: true,
+      unique: true,
     },
 
     // VERIFICATION

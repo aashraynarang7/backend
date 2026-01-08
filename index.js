@@ -92,7 +92,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/custom-tour-requests", customTourRequestRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/tourguidebookings", tgbookingRoutes);
-app.use("/api/v2/guides",TourGuideRoutes )
+//app.use("/api/v2/guides",TourGuideRoutes )
 app.use("/api/services",TourRoutes)
 //Middleware for handling errors:
 app.use(notFound);

@@ -3,7 +3,15 @@ import Guides from "../models/TourGuide.model.js";
 // CREATE GUIDE
 export const createGuide = async (req, res) => {
   try {
-    const guide = await Guides.create(req.body);
+    console.log("FILES:", req.file);
+    console.log("BODY:", req.body);
+
+    const profilePicture = req.file?.location; // S3 URL
+
+    const guide = await Guides.create({
+      ...req.body,
+      profilePicture,
+    });
 
     res.status(201).json({
       success: true,
@@ -54,9 +62,15 @@ export const getGuideById = async (req, res) => {
 // UPDATE GUIDE
 export const updateGuide = async (req, res) => {
   try {
+    const updateData = { ...req.body };
+
+    if (req.file) {
+      updateData.profilePicture = req.file.location;
+    }
+
     const guide = await Guides.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       { new: true, runValidators: true }
     );
 
@@ -76,7 +90,6 @@ export const updateGuide = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
-
 // DELETE GUIDE
 export const deleteGuide = async (req, res) => {
   try {

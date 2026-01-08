@@ -2,12 +2,7 @@ import Tgbooking from "../models/TourGuideBooking.js"
 // CREATE BOOKING
 export const createBooking = async (req, res) => {
   try {
-      if (!totalPrice || totalPrice <= 0) {
-        return res.status(400).json({ 
-          success: false, 
-          message: "A valid total price is required." 
-        });
-      }
+
 
     const booking = await Tgbooking.create({
       ...req.body,
@@ -20,9 +15,11 @@ export const createBooking = async (req, res) => {
       data: booking,
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(401).json({
       success: false,
+      app:"hello",
       message: error.message,
+      
     });
   }
 };

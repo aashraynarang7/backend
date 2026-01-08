@@ -6,13 +6,16 @@ import {
   updateGuide,
   deleteGuide,
 } from "../controllers/TourGuide.js";
+import { upload } from "../middleware/s3.uploads.js";
 
 const router = express.Router();
 
-router.post("/", createGuide);
+router.post("/",  upload.single("image"),
+ createGuide);
 router.get("/", getAllGuides);
 router.get("/:id", getGuideById);
-router.put("/:id", updateGuide);
+router.put("/:id",   upload.single("image"),
+updateGuide);
 router.delete("/:id", deleteGuide);
 
 export default router;

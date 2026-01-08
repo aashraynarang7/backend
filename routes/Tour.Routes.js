@@ -11,20 +11,12 @@ import { upload } from "../middleware/s3.uploads.js";
 
 const router = express.Router();
 
-router.post(
-  "/",
-  upload.fields({name:"images", maxCount:8}),
-  createTour
-);
+router.post("/", upload.array("images", 8), createTour);
 
 router.get("/", getAllTours);
 router.get("/:id", getTourById);
 
-router.put(
-  "/:id",
-  upload.fields({name:"photos", maxCount:8}),
-  updateTour
-);
+router.put("/:id", upload.array("images", 8), updateTour);
 
 router.delete("/:id", deleteTour);
 
